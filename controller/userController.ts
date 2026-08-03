@@ -30,23 +30,16 @@ export const register = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { email, username, password, confirmPassword } = req.body;
+    const { email, username, password } = req.body;
 
 
-    if (!email || !username || !password || !confirmPassword) {
+    if (!email || !username || !password ) {
       res.status(400).json({
         message: "Please fill all fields",
       });
       return;
     }
 
-
-    if (password !== confirmPassword) {
-      res.status(400).json({
-        message: "Passwords do not match",
-      });
-      return;
-    }
 
 
     const existingUser = await User.findOne({ email });
